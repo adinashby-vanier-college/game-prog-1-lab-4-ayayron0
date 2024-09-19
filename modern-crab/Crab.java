@@ -17,7 +17,33 @@ public class Crab extends Actor
     {
         moveAndTurn();
         eat();
-        
+        if (isGameWon()) {
+            transitionToGameWonWorld();
+            Greenfoot.playSound("winner.wav");
+        }
+    }
+
+    /**
+     * When there are no more worms, victory will be achieved. 
+     */
+    public boolean isGameWon()
+    {
+        World world = getWorld();
+        if (world.getObjects(Worm.class).isEmpty()) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+    /**
+     * Make the current world, to the GameWonWorld!
+     */
+    public void transitionToGameWonWorld()
+    {
+        World gameWonWorld =  new  GameWonWorld();
+        Greenfoot.setWorld(gameWonWorld);
     }
 
     /**
